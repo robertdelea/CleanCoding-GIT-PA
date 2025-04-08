@@ -1,17 +1,20 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+//structura unui nod in lista de adiacenta
 typedef struct Node {
     int data;
     struct Node *next;
 } NODE;
 
+//structura grafului
 typedef struct g {
     int v;
     int *vis;
     NODE **alst;
 } GPH;
 
+//structura stivei
 typedef struct s {
     int t;
     int scap;
@@ -25,6 +28,7 @@ NODE *create_node(int v) {
     return nn;
 }
 
+//adauga o muchie intre doua noduri
 void add_edge(GPH *g, int src, int dest) {
     NODE *nn = create_node(dest);
     nn->next = g->alst[src];
@@ -34,6 +38,7 @@ void add_edge(GPH *g, int src, int dest) {
     g->alst[dest] = nn;
 }
 
+//initializeaza un graf cu 'v' noduri
 GPH *create_g(int v) {
     GPH *g = malloc(sizeof(GPH));
     g->v = v;
@@ -47,6 +52,7 @@ GPH *create_g(int v) {
     return g;
 }
 
+//creeaza o stiva cu capacitatea data
 STK *create_s(int scap) {
     STK *s = malloc(sizeof(STK));
     s->arr = malloc(scap * sizeof(int));
@@ -60,6 +66,7 @@ void push(int pshd, STK *s) {
     s->arr[s->t] = pshd;
 }
 
+//parcurgere DFS care inregistreaza nodurile in stiva
 void DFS(GPH *g, STK *s, int v_nr) {
     NODE *adj_list = g->alst[v_nr];
     NODE *aux = adj_list;
