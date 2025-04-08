@@ -19,6 +19,7 @@ NODE *create_node(int v) {
     return new_node;
 }
 
+//initializeaza un graf cu un numar dat de noduri
 GPH *create_graph(int vertices) {
     GPH *graph = malloc(sizeof(GPH));
     graph->vertices = vertices;
@@ -32,6 +33,7 @@ GPH *create_graph(int vertices) {
     return graph;
 }
 
+//adauga o muchie intre src si dest
 void add_edge(GPH *graph, int src, int dest) {
     NODE *new_node = create_node(dest);
     new_node->next = graph->adjacency_lists[src];
@@ -95,6 +97,7 @@ void wipe_visited_list(GPH *graph, int nr_of_vertices) {
     }
 }
 
+//parcurgere in adancime(DFS)
 void DFS(GPH *graph, int vertex_nr) {
     NODE *adj_list = graph->adjacency_lists[vertex_nr];
     NODE *temp = adj_list;
@@ -111,6 +114,7 @@ void DFS(GPH *graph, int vertex_nr) {
     }
 }
 
+//parcurgere in latime(BFS)
 void BFS(GPH *graph, int start) {
     NODE *queue = NULL;
     graph->visited[start] = 1;
